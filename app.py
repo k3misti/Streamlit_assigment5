@@ -18,3 +18,19 @@ vuosi_yo_roi_df = rovaniemi_df[["Vuosi","Yöpymiset, lkm Rovaniemi"]].groupby(by
 #st.dataframe(vuosi_yo_roi_df)
 
 st.bar_chart(vuosi_yo_roi_df)
+
+temp_df = rovaniemi_df[["Vuosi","Kotimaiset yöpymiset, lkm Rovaniemi", "Ulkomaiset yöpymiset Rovaniemi"]]
+temp_df["Ulkomaiset yöpymiset Rovaniemi"] = temp_df["Ulkomaiset yöpymiset Rovaniemi"].str.replace(".", "")
+temp_df["Ulkomaiset yöpymiset Rovaniemi"] = pd.to_numeric(temp_df["Ulkomaiset yöpymiset Rovaniemi"])
+vuosi_yo_ulkomaiset_roi_df = temp_df.groupby(by="Vuosi").sum()
+st.dataframe(vuosi_yo_ulkomaiset_roi_df)
+
+st.line_chart(vuosi_yo_ulkomaiset_roi_df)
+
+#huone_hinta_df = rovaniemi_df[["Kuukausi" ,"Huoneen keskihinta Rovaniemi", "Huonekäyttöaste, % Rovaniemi"]]
+
+rovaniemi_df["Huoneen keskihinta Rovaniemi"] = rovaniemi_df["Huoneen keskihinta Rovaniemi"].str.replace(".", "")
+rovaniemi_df["Huoneen keskihinta Rovaniemi"] = pd.to_numeric(rovaniemi_df["Huoneen keskihinta Rovaniemi"])
+#rovaniemi_df["Yöpymiset, lkm Rovaniemi"] = rovaniemi_df["Yöpymiset, lkm Rovaniemi"].str.replace(".", "")
+rovaniemi_df["Yöpymiset, lkm Rovaniemi"] = pd.to_numeric(rovaniemi_df["Yöpymiset, lkm Rovaniemi"])
+st.area_chart(rovaniemi_df, x = "Kuukausi", y = ["Huoneen keskihinta Rovaniemi", "Yöpymiset, lkm Rovaniemi"])
