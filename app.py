@@ -4,6 +4,8 @@ import pandas as pd
 rovaniemi_df = pd.read_csv("https://pxdata.stat.fi/PxWeb/sq/1bf78c99-9372-4ac9-8881-f88228916946", encoding="latin-1")
 rovaniemi_df[["Vuosi", "Kuukausinumero"]] = rovaniemi_df["Kuukausi"].str.split("M", expand=True)
 
+st.title("Hotellien kuukausittainen kapasiteetti ja yöpymiskustannukset")
+
 
 st.dataframe(rovaniemi_df)
 
